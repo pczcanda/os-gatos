@@ -1,10 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { uploadNewCat } from "../../utils";
+import { useNavigate } from "react-router-dom";
+import { APP_ROUTES } from "../../constants";
 
 const UploadPage: React.FC<{}> = () => {
   /* state */
   const [fileToUpload, setFileToUpload] = useState<FileList | null>(null);
+
+  /* hooks */
+  const navigate = useNavigate();
 
   /* effects */
   useEffect(() => {
@@ -31,11 +36,12 @@ const UploadPage: React.FC<{}> = () => {
       console.log("uploading..");
       const newCat = new FormData();
       newCat.append("file", file);
-      newCat.append("sub_id", "my-user-1");
 
       const uploadedImage = await uploadNewCat(newCat);
 
       console.log("uploaded", uploadedImage);
+
+      navigate(APP_ROUTES.ROOT);
     } catch (e) {
       console.error("upload error", e);
     }
