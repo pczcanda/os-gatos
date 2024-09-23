@@ -20,8 +20,8 @@ describe("Cats Listing Page", () => {
 
     render(<CatsPage />, { wrapper: BrowserRouter });
 
-    const listItems = await screen.findAllByRole("listitem");
+    const catItems = await screen.findAllByTestId(/cat-/i);
 
-    expect(listItems).not.toHaveLength(0);
+    expect(catItems).toHaveLength(1);
   });
 });
