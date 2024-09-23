@@ -6,7 +6,6 @@ export const uploadNewCat = async (catImage: FormData) => {
     method: "POST",
     headers: {
       ...HTTPS_HEADERS,
-      "Content-Type": "multipart/form-data",
     },
     body: catImage,
   });
