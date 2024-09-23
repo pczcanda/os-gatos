@@ -1,3 +1,5 @@
+import { MessageResponse } from "./https";
+
 export interface NewCatResponse {
   id: string;
   url: string;
@@ -35,7 +37,5 @@ export interface FavouriteCat {
 
 export type FavouriteCatsList = FavouriteCat[];
 
-export interface FavouriteCatResponse {
-  message: string;
-  id: string;
-}
+export type FavouriteCatResponse = MessageResponse;
+export type VoteCatResponse = MessageResponse;

@@ -4,6 +4,7 @@ import {
   FavouriteCatResponse,
   FavouriteCatsList,
   NewCatResponse,
+  VoteCatResponse,
 } from "../types/cats";
 
 export const uploadNewCat = async (catImage: FormData) => {
@@ -88,7 +89,45 @@ export const unfavouriteACat = async (favCatId: string) => {
   if (!response.ok) {
     throw new Error("failed to unfavourite cat");
   }
-  const data = await response.json();
+  const data: FavouriteCatResponse = await response.json();
+
+  return data;
+};
+
+export const voteCatUp = async (catImageId: string) => {
+  const response = await fetch(ENDPOINTS.VOTE_CATS, {
+    method: "POST",
+    headers: {
+      ...HTTPS_HEADERS,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      image_id: catImageId,
+      value: 1,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`failed to vote up cat with id ${catImageId}`);
+  }
+  const data: VoteCatResponse = await response.json();
+
+  return data;
+};
+
+export const voteCatDown = async (voteCatId: string) => {
+  const response = await fetch(ENDPOINTS.VOTE_CAT(voteCatId), {
+    method: "DELETE",
+    headers: {
+      ...HTTPS_HEADERS,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("failed to vote cat down");
+  }
+  const data: VoteCatResponse = await response.json();
 
   return data;
 };
