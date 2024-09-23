@@ -1,6 +1,6 @@
-import { Cat } from "../../types";
+import { Cat, FavouriteCat } from "../../types";
 
 export interface CatCardProps {
   cat: Cat;
-  isFavourite?: boolean;
+  favouriteId?: string;
 }

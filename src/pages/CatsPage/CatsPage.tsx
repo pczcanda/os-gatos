@@ -68,13 +68,13 @@ const CatsPage: React.FC<{}> = () => {
           <h2>Listing all cats</h2>
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             {catsList.map((cat) => {
-              const isFavourite = !!favouriteCats.find(
+              const favouriteDetails = favouriteCats.find(
                 (favCat) => favCat.image_id === cat.id
               );
 
               return (
                 <Grid size={{ xs: 4, sm: 4, md: 3 }} key={`cat-${cat.id}`}>
-                  <CatCard cat={cat} isFavourite={isFavourite} />
+                  <CatCard cat={cat} favouriteId={favouriteDetails?.id} />
                 </Grid>
               );
             })}

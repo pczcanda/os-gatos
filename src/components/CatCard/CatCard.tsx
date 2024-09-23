@@ -1,26 +1,29 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Card, CardActions, CardMedia, IconButton } from "@mui/material";
 import { CatCardProps } from "./CatCardProps";
-import { favouriteACat } from "../../utils";
+import { favouriteACat, unfavouriteACat } from "../../utils";
 import { useState } from "react";
 
-const CatCard: React.FC<CatCardProps> = ({ cat, isFavourite = false }) => {
+const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
   /* state */
-  const [favourited, setFavourited] = useState<boolean>(isFavourite);
+  const [favId, setFavId] = useState<string | undefined>(favouriteId);
 
   /* events */
   const handleFavouriting = async () => {
     try {
-      if (favourited) {
+      if (favId !== undefined) {
+        const favouriteCatDetails = await unfavouriteACat(favId);
+
+        if (favouriteCatDetails.message === "SUCCESS") {
+          setFavId(undefined);
+        }
       } else {
         const favouriteCatDetails = await favouriteACat(cat.id);
         if (favouriteCatDetails.message === "SUCCESS") {
-          setFavourited(true);
+          setFavId(favouriteCatDetails.id);
         }
       }
-    } catch (e) {
-      setFavourited(false);
-    }
+    } catch (e) {}
   };
 
   return (
@@ -36,7 +39,7 @@ const CatCard: React.FC<CatCardProps> = ({ cat, isFavourite = false }) => {
       )}
       <CardActions>
         <IconButton aria-label="add to favorites" onClick={handleFavouriting}>
-          <FavoriteIcon color={favourited ? "error" : undefined} />
+          <FavoriteIcon color={!!favId ? "error" : undefined} />
         </IconButton>
       </CardActions>
     </Card>

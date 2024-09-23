@@ -35,7 +35,7 @@ describe("<CatCard /> cat details", () => {
       breed_ids: null,
     };
 
-    render(<CatCard cat={cat} isFavourite />);
+    render(<CatCard cat={cat} />);
 
     const FavIcon = screen.getByLabelText("add to favorites");
     expect(FavIcon).toBeInTheDocument();
