@@ -1,5 +1,7 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
+import CatsPage from "../pages/CatsPage/CatsPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const App: React.FC<{}> = () => {
   return (
@@ -16,7 +18,9 @@ const App: React.FC<{}> = () => {
               </main>
             </div>
           }
-        ></Route>
+        >
+          <Route path="/" element={<CatsPage />} errorElement={<ErrorPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
