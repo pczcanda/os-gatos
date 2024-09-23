@@ -1,19 +1,27 @@
 import { Box, Grid2 as Grid, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import CatCard from "../../components/CatCard/CatCard";
-import { AppError, CatsList, FavouriteCatsList } from "../../types";
-import { fetchAllCats, fetchAllFavouriteCats } from "../../utils";
+import {
+  AppError,
+  CatsList,
+  CatVotesList,
+  FavouriteCatsList,
+} from "../../types";
+import {
+  fetchAllCats,
+  fetchAllCatVotes,
+  fetchAllFavouriteCats,
+} from "../../utils";
 
 const CatsPage: React.FC<{}> = () => {
   /* state */
   const [catsList, setCatsList] = useState<CatsList>([]);
   const [favouriteCats, setFavouriteCats] = useState<FavouriteCatsList>([]);
+  const [catVotes, setCatVotes] = useState<CatVotesList>([]);
 
-  const [errorFetchingCatsList, setErrorFetchingCatsList] = useState<
+  const [errorFetchingCatsData, setErrorFetchingCatsData] = useState<
     AppError | undefined
   >();
-  const [errorFetchingFavouriteCatsList, setErrorFetchingFavouriteCatsList] =
-    useState<AppError | undefined>();
 
   /* effects */
   useEffect(() => {
@@ -24,7 +32,7 @@ const CatsPage: React.FC<{}> = () => {
         setCatsList(allCats);
       } catch (e: any) {
         // handle Error
-        setErrorFetchingCatsList({
+        setErrorFetchingCatsData({
           message: e.message || "Failed to fetch cats!",
         });
       }
@@ -37,7 +45,20 @@ const CatsPage: React.FC<{}> = () => {
         setFavouriteCats(allFavouriteCats);
       } catch (e: any) {
         // handle Error
-        setErrorFetchingFavouriteCatsList({
+        setErrorFetchingCatsData({
+          message: e.message || "Failed to fetch favourite cats!",
+        });
+      }
+    };
+
+    const fetchCatVotes = async () => {
+      try {
+        const allCatVotes = await fetchAllCatVotes();
+
+        setCatVotes(allCatVotes);
+      } catch (e: any) {
+        // handle Error
+        setErrorFetchingCatsData({
           message: e.message || "Failed to fetch favourite cats!",
         });
       }
@@ -45,25 +66,26 @@ const CatsPage: React.FC<{}> = () => {
 
     fetchCats();
     fetchFavouriteCats();
+    fetchCatVotes();
   }, []);
 
   /* events */
-  const handleErrorFetchingCatsList = () => {
-    setErrorFetchingCatsList(undefined);
+  const handleErrorFetchingCatsData = () => {
+    setErrorFetchingCatsData(undefined);
   };
 
   return (
     <>
-      {errorFetchingCatsList && (
+      {errorFetchingCatsData && (
         <Snackbar
-          open={!!errorFetchingCatsList.message}
-          onClose={handleErrorFetchingCatsList}
-          message={errorFetchingCatsList.message}
+          open={!!errorFetchingCatsData.message}
+          onClose={handleErrorFetchingCatsData}
+          message={errorFetchingCatsData.message}
           color="error"
         />
       )}
 
-      {!errorFetchingCatsList && (
+      {!errorFetchingCatsData && (
         <Box>
           <h2>Listing all cats</h2>
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>

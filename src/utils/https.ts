@@ -1,6 +1,7 @@
 import { ENDPOINTS, HTTPS_HEADERS } from "../constants";
 import {
   CatsList,
+  CatVotesList,
   FavouriteCatResponse,
   FavouriteCatsList,
   NewCatResponse,
@@ -90,6 +91,21 @@ export const unfavouriteACat = async (favCatId: string) => {
     throw new Error("failed to unfavourite cat");
   }
   const data: FavouriteCatResponse = await response.json();
+
+  return data;
+};
+
+export const fetchAllCatVotes = async () => {
+  const response = await fetch(ENDPOINTS.VOTE_CATS, {
+    headers: {
+      ...HTTPS_HEADERS,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("failed to get cat votes...");
+  }
+  const data: CatVotesList = await response.json();
 
   return data;
 };
