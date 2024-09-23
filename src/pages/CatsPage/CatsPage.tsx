@@ -1,7 +1,8 @@
-import { Box, Snackbar } from "@mui/material";
+import { Box, Grid2 as Grid, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AppError, CatsList } from "../../types";
 import { fetchCats } from "../../utils";
+import CatCard from "../../components/CatCard/CatCard";
 
 const CatsPage: React.FC<{}> = () => {
   /* state */
@@ -47,20 +48,15 @@ const CatsPage: React.FC<{}> = () => {
       {!errorFetchingCatsList && (
         <Box>
           <h2>Listing all cats</h2>
-          <Box component="ul">
+          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             {catsList.map((cat) => {
               return (
-                <Box
-                  component="li"
-                  role="listitem"
-                  mb={2}
-                  key={`cat-${cat.id}`}
-                >
-                  <img src={cat.url} />
-                </Box>
+                <Grid size={{ xs: 4, sm: 4, md: 3 }} key={`cat-${cat.id}`}>
+                  <CatCard cat={cat} />
+                </Grid>
               );
             })}
-          </Box>
+          </Grid>
         </Box>
       )}
     </>
