@@ -4,4 +4,5 @@ export const API = "https://api.thecatapi.com/v1/images";
 
 export const ENDPOINTS = {
   UPLOAD: `${API}/upload`,
+  ALL_CATS: `${API}/`,
 };
