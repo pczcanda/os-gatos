@@ -6,5 +6,5 @@ export const ENDPOINTS = {
   UPLOAD: `${API}/images/upload`,
   ALL_CATS: `${API}/images/?limit=100`,
   FAVOURITE_CATS: `${API}/favourites`,
-  FAVOURITE_CAT: (catId: string) => `${API}/favourites/${catId}`,
+  FAVOURITE_CAT: (favCatId: string) => `${API}/favourites/${favCatId}`,
 };

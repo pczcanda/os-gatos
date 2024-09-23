@@ -66,9 +66,29 @@ export const favouriteACat = async (catImageId: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("failed to get favourite cats...");
+    throw new Error(`failed to favourite cat with id ${catImageId}`);
   }
   const data: FavouriteCatResponse = await response.json();
+
+  return data;
+};
+
+export const unfavouriteACat = async (favCatId: string) => {
+  const response = await fetch(ENDPOINTS.FAVOURITE_CAT(favCatId), {
+    method: "DELETE",
+    headers: {
+      ...HTTPS_HEADERS,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      favourite_id: favCatId,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("failed to unfavourite cat");
+  }
+  const data = await response.json();
 
   return data;
 };
