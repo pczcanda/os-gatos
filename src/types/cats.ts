@@ -3,9 +3,13 @@ export interface Cat {
   url: string;
   width: number;
   height: number;
-  mime_type: string;
+  mime_type?: string;
   breeds: Array<{}>;
-  categories: string[];
+  categories?: string[];
+  sub_id?: string;
+  created_at: string;
+  original_filename: string;
+  breed_ids: string[] | null;
 }
 
 export interface NewCatResponse {
