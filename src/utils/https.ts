@@ -17,9 +17,6 @@ export const uploadNewCat = async (catImage: FormData) => {
     body: catImage,
   });
 
-  if (!response.ok) {
-    throw new Error("failed to upload new cat picture through the API");
-  }
   const data: NewCatResponse = await response.json();
 
   return data;
@@ -32,9 +29,6 @@ export const fetchAllCats = async () => {
     },
   });
 
-  if (!response.ok) {
-    throw new Error("failed to get all cats...");
-  }
   const data: CatsList = await response.json();
 
   return data;
@@ -47,9 +41,6 @@ export const fetchAllFavouriteCats = async () => {
     },
   });
 
-  if (!response.ok) {
-    throw new Error("failed to get favourite cats...");
-  }
   const data: FavouriteCatsList = await response.json();
 
   return data;
@@ -67,9 +58,6 @@ export const favouriteACat = async (catImageId: string) => {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(`failed to favourite cat with id ${catImageId}`);
-  }
   const data: FavouriteCatResponse = await response.json();
 
   return data;
@@ -87,9 +75,6 @@ export const unfavouriteACat = async (favCatId: string) => {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error("failed to unfavourite cat");
-  }
   const data: FavouriteCatResponse = await response.json();
 
   return data;
@@ -102,9 +87,6 @@ export const fetchAllCatVotes = async () => {
     },
   });
 
-  if (!response.ok) {
-    throw new Error("failed to get cat votes...");
-  }
   const data: CatVotesList = await response.json();
 
   return data;
@@ -144,9 +126,6 @@ export const voteCatDown = async (catImageId: string) => {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(`failed to vote down cat with id ${catImageId}`);
-  }
   const data: VoteCatResponse = await response.json();
 
   return data;

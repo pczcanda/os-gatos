@@ -134,7 +134,7 @@ const CatsPage: React.FC<{}> = () => {
             </Box>
 
             <Box my={8}>
-              <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid container spacing={3} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {catsList.map((cat) => {
                   const favouriteDetails = favouriteCats.find(
                     (favCat) => favCat.image_id === cat.id

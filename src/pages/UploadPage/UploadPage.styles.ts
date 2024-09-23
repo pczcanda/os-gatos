@@ -17,10 +17,6 @@ export const uploadFileSx: SxProps<Theme> = {
   },
 };
 
-export const pageIntroSx: SxProps<Theme> = {
-  p: 8,
-};
-
 export const uploadPreviewSx: SxProps<Theme> = {
   backgroundColor: "#FAFAFA",
   p: 8,
