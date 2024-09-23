@@ -1,3 +1,13 @@
+export interface NewCatResponse {
+  id: string;
+  url: string;
+  sub_id?: string;
+  width: number;
+  height: number;
+  original_filename: string;
+  pending: 0 | 1;
+  approved: 0 | 1;
+}
 export interface Cat {
   id: string;
   url: string;
@@ -12,15 +22,15 @@ export interface Cat {
   breed_ids: string[] | null;
 }
 
-export interface NewCatResponse {
+export type CatsList = Cat[];
+
+export interface FavouriteCat {
   id: string;
-  url: string;
-  sub_id: string;
-  width: number;
-  height: number;
-  original_filename: string;
-  pending: 0 | 1;
-  approved: 0 | 1;
+  sub_id?: string;
+  user_id: string;
+  image_id: string;
+  created_at: string;
+  image: {};
 }
 
-export type CatsList = Cat[];
+export type FavouriteCatsList = FavouriteCat[];
