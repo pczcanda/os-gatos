@@ -1,12 +1,24 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid2 as Grid,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import { uploadNewCat } from "../../utils";
 import { useNavigate } from "react-router-dom";
+import CatUploadPreview from "../../components/CatUploadPreview/CatUploadPreview";
 import { APP_ROUTES } from "../../constants";
+import { uploadNewCat } from "../../utils";
+import {
+  pageIntroSx,
+  uploadFileSx,
+  uploadPreviewSx,
+} from "./UploadPage.styles";
 
 const UploadPage: React.FC<{}> = () => {
   /* state */
-  const [fileToUpload, setFileToUpload] = useState<FileList | null>(null);
+  const [fileToUpload, setFileToUpload] = useState<File | null>(null);
 
   /* hooks */
   const navigate = useNavigate();
@@ -14,20 +26,22 @@ const UploadPage: React.FC<{}> = () => {
   /* effects */
   useEffect(() => {
     if (fileToUpload !== null) {
-      console.log(`file: ${fileToUpload.item(0)?.name}`);
+      console.log(`file: ${fileToUpload.name}`);
     }
   }, [fileToUpload]);
 
+  /* values */
+
   /* events */
   const handleSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFileToUpload(e.target.files);
+    e.target.files !== null && setFileToUpload(e.target.files[0]);
   };
 
   const handleUploadFile = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const file = fileToUpload?.item(0);
+      const file = fileToUpload;
       if (!file) {
         console.log("file issues..");
         return;
@@ -48,26 +62,67 @@ const UploadPage: React.FC<{}> = () => {
   };
 
   return (
-    <Box>
-      <Typography variant="h2">Upload you cat photo</Typography>
-      <Typography variant="body1" data-testid="upload-page-description">
-        Description for uplad system will go here
-      </Typography>
+    <Box className="upload-page">
+      <Box my={8}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            <Grid size={{ sm: 6 }}>
+              <Typography variant="h3">Upload your cathlete</Typography>
+            </Grid>
+            <Grid size={{ sm: 6 }}>
+              <Typography variant="body1" data-testid="upload-page-description">
+                Ready to enter your next feline Olympian? Upload a picture of
+                your new champion—just one, please! Make sure it’s a cat (yes,
+                the committee will be checking!). No sneaky dogs, bunnies, or
+                ferrets trying to get in on the action—we’re keeping this
+                competition strictly paws and whiskers. Let’s see if your new
+                recruit has what it takes to climb the podium!
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
-      <Box component="form" onSubmit={handleUploadFile}>
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-        >
-          Pick a new image
-          <input type="file" onChange={handleSelectFile} multiple />
-        </Button>
+      <Box className="upload-preview" sx={uploadPreviewSx}>
+        <Container maxWidth="lg">
+          <Box component="form" onSubmit={handleUploadFile}>
+            <Grid container spacing={4}>
+              <Grid size={{ md: 6 }}>
+                <Box className="upload-preview">
+                  <CatUploadPreview catFile={fileToUpload} />
+                  <Button
+                    component="label"
+                    role={undefined}
+                    variant="outlined"
+                    tabIndex={-1}
+                    sx={uploadFileSx}
+                  >
+                    {fileToUpload ? "Swap image" : "Pick an image"}
+                    <input type="file" onChange={handleSelectFile} multiple />
+                  </Button>
+                </Box>
+              </Grid>
+              <Grid size={{ md: 6 }}>
+                {fileToUpload && (
+                  <Box>
+                    <Typography variant="body1" sx={{ mb: 4 }}>
+                      Your cathlete is ready to be submitted to the competition
+                    </Typography>
 
-        <Button type="submit" disabled={!fileToUpload} disableTouchRipple>
-          Submit
-        </Button>
+                    <Button
+                      type="submit"
+                      disableTouchRipple
+                      size="large"
+                      variant="contained"
+                    >
+                      Send your cat to the Gatos
+                    </Button>
+                  </Box>
+                )}
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
       </Box>
     </Box>
   );

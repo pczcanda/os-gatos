@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { APP_ROUTES } from "../constants";
 import CatsPage from "../pages/CatsPage/CatsPage";
@@ -14,11 +14,11 @@ const App: React.FC<{}> = () => {
           element={
             <Box className="app-layout">
               <Box component="header" className="header" sx={headerSx}>
-                <h1 className="header__title">Os Gatos</h1>
+                <h1 className="header__title">The Gatos</h1>
               </Box>
-              <Container component="main" className="main" maxWidth="lg">
+              <Box component="main" className="main">
                 <Outlet />
-              </Container>
+              </Box>
             </Box>
           }
         >
