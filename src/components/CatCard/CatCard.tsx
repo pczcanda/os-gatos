@@ -1,8 +1,9 @@
+import { ThumbDown, ThumbUp } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Card, CardActions, CardMedia, IconButton } from "@mui/material";
-import { CatCardProps } from "./CatCardProps";
-import { favouriteACat, unfavouriteACat } from "../../utils";
 import { useState } from "react";
+import { favouriteACat, unfavouriteACat, voteCatUp } from "../../utils";
+import { CatCardProps } from "./CatCardProps";
 
 const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
   /* state */
@@ -26,6 +27,20 @@ const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
     } catch (e) {}
   };
 
+  const handleVoteUp = async () => {
+    try {
+      const voteCatUpResponse = await voteCatUp(cat.id);
+      if (voteCatUpResponse.message === "SUCCESS") {
+        // setFavId(favouriteCatDetails.id);
+      }
+    } catch (e) {}
+  };
+
+  const handleVoteDown = async () => {
+    try {
+    } catch (e) {}
+  };
+
   return (
     <Card>
       {cat.url && (
@@ -40,6 +55,12 @@ const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
       <CardActions>
         <IconButton aria-label="add to favorites" onClick={handleFavouriting}>
           <FavoriteIcon color={!!favId ? "error" : undefined} />
+        </IconButton>
+        <IconButton aria-label="vote up" onClick={handleVoteUp}>
+          <ThumbUp />
+        </IconButton>
+        <IconButton aria-label="vote down" onClick={handleVoteDown}>
+          <ThumbDown />
         </IconButton>
       </CardActions>
     </Card>
