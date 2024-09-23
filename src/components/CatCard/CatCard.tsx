@@ -1,13 +1,30 @@
 import { ThumbDown, ThumbUp } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Card, CardActions, CardMedia, IconButton } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Chip,
+  IconButton,
+} from "@mui/material";
 import { useState } from "react";
-import { favouriteACat, unfavouriteACat, voteCatUp } from "../../utils";
+import {
+  favouriteACat,
+  unfavouriteACat,
+  voteCatDown,
+  voteCatUp,
+} from "../../utils";
 import { CatCardProps } from "./CatCardProps";
 
-const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
+const CatCard: React.FC<CatCardProps> = ({
+  cat,
+  favouriteId = undefined,
+  votesCount = 0,
+}) => {
   /* state */
   const [favId, setFavId] = useState<string | undefined>(favouriteId);
+  const [votes, setVotes] = useState<number>(votesCount);
 
   /* events */
   const handleFavouriting = async () => {
@@ -31,13 +48,17 @@ const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
     try {
       const voteCatUpResponse = await voteCatUp(cat.id);
       if (voteCatUpResponse.message === "SUCCESS") {
-        // setFavId(favouriteCatDetails.id);
+        setVotes((currentVotes) => currentVotes + 1);
       }
     } catch (e) {}
   };
 
   const handleVoteDown = async () => {
     try {
+      const voteCatUpResponse = await voteCatDown(cat.id);
+      if (voteCatUpResponse.message === "SUCCESS") {
+        setVotes((currentVotes) => currentVotes - 1);
+      }
     } catch (e) {}
   };
 
@@ -52,6 +73,9 @@ const CatCard: React.FC<CatCardProps> = ({ cat, favouriteId = undefined }) => {
           data-testid={`cat-${cat.id}`}
         />
       )}
+      <CardContent>
+        <Chip label={`Score: ${votes}`} />
+      </CardContent>
       <CardActions>
         <IconButton aria-label="add to favorites" onClick={handleFavouriting}>
           <FavoriteIcon color={!!favId ? "error" : undefined} />

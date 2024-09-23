@@ -94,9 +94,17 @@ const CatsPage: React.FC<{}> = () => {
                 (favCat) => favCat.image_id === cat.id
               );
 
+              const votesForCat = catVotes
+                .filter((votedCat) => votedCat.image_id === cat.id)
+                .reduce((total, currentVote) => total + currentVote.value, 0);
+
               return (
                 <Grid size={{ xs: 4, sm: 4, md: 3 }} key={`cat-${cat.id}`}>
-                  <CatCard cat={cat} favouriteId={favouriteDetails?.id} />
+                  <CatCard
+                    cat={cat}
+                    favouriteId={favouriteDetails?.id}
+                    votesCount={votesForCat}
+                  />
                 </Grid>
               );
             })}

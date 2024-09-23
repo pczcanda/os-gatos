@@ -131,17 +131,21 @@ export const voteCatUp = async (catImageId: string) => {
   return data;
 };
 
-export const voteCatDown = async (voteCatId: string) => {
-  const response = await fetch(ENDPOINTS.VOTE_CAT(voteCatId), {
-    method: "DELETE",
+export const voteCatDown = async (catImageId: string) => {
+  const response = await fetch(ENDPOINTS.VOTE_CATS, {
+    method: "POST",
     headers: {
       ...HTTPS_HEADERS,
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      image_id: catImageId,
+      value: -1,
+    }),
   });
 
   if (!response.ok) {
-    throw new Error("failed to vote cat down");
+    throw new Error(`failed to vote down cat with id ${catImageId}`);
   }
   const data: VoteCatResponse = await response.json();
 
