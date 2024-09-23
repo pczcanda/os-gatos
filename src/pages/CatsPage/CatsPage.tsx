@@ -1,21 +1,22 @@
 import { Box, Grid2 as Grid, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
-import { AppError, CatsList } from "../../types";
-import { fetchCats } from "../../utils";
+import { AppError, CatsList, FavouriteCatsList } from "../../types";
+import { fetchAllCats, fetchCats } from "../../utils";
 import CatCard from "../../components/CatCard/CatCard";
 
 const CatsPage: React.FC<{}> = () => {
   /* state */
   const [catsList, setCatsList] = useState<CatsList>([]);
+
   const [errorFetchingCatsList, setErrorFetchingCatsList] = useState<
     AppError | undefined
   >();
 
   /* effects */
   useEffect(() => {
-    const fetchCakes = async () => {
+    const fetchCats = async () => {
       try {
-        const allCats = await fetchCats();
+        const allCats = await fetchAllCats();
 
         setCatsList(allCats);
       } catch (e: any) {
@@ -26,7 +27,7 @@ const CatsPage: React.FC<{}> = () => {
       }
     };
 
-    fetchCakes();
+    fetchCats();
   }, []);
 
   /* events */
