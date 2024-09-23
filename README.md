@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# Gatos - the Cats Olympics
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A list of all your cathletes that have entered the Gatos.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+This app runs with
 
-### `npm start`
+- **React** (through create-react-app)
+- **Typescript**
+- **Webpack** (in the background to build and run the application)
+- **Material UI** (for quick layout and styling of the application)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Clone the repo: `git clone git@github.com:pczcanda/os-gatos.git`
+2. Go to folder: `cd os-gatos`
+3. Install packages and dependencies: `npm install`
+4. Run the application: `npm start`
 
-### `npm test`
+## Gatos API
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+(The Cat API | https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=FJkYOq9tW) has been used for this project
 
-### `npm run build`
+The following methods were implemented:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `GET` /images
+- `GET` /favourites
+- `GET` /votes
+- `POST` /images
+- `POST` /favourites
+- `POST` /votes
+- `DELETE` /favourites/{id}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Future Improvements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Error handling**
 
-### `npm run eject`
+   The UI for error handling can be improved to provide better feedback to the user and allow them to better navigate around the app when errors occur.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. **Optimistic updating vs Loading UI**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Currently the app uses optimistic updating when adding a new cake to the list, which allows for a seamless transition once the form dialog is removed from the page and the new cake is seen in the list without having to make a new call to the server to get the list again. However, there could be a UI requirement to add loading states when the data is submitted and refreshed, specially if many users are simultaneously adding cakes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. **Styling**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   Styling of the app can be vastly improved with the introduction of brand guidelines and a styleguide.
 
-## Learn More
+4. **Image upload**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   It would be nice to add a button to remove the selected image before submitting it. It would also be beneficial to check and validate the image before sending it
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. **Caching of queries (React query)**
+
+   To reduce the amount of calls through the API, caching the calls to GET data for a small perioid of time with a tool like React Query, could be beneficial to improve the app performance.
+
+6. **PWA**
+
+   The app could be turned into a full Progressive Web App (PWA) allowing users to use the app even if offline, where options to navigate with cached data and save new cakes and submit them once the device is back online.
+
+7. **Tests**
+
+   More test scenarios can be added to the app
