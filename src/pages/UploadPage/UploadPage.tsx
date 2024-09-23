@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CatUploadPreview from "../../components/CatUploadPreview/CatUploadPreview";
 import Loader from "../../components/Loader/Loader";
-import { APP_ROUTES } from "../../constants";
+import { APP_ROUTES, IMAGE_TYPE_RGX } from "../../constants";
 import { uploadNewCat } from "../../utils";
 import { uploadFileSx, uploadPreviewSx } from "./UploadPage.styles";
 import { AppError } from "../../types";
@@ -30,7 +30,19 @@ const UploadPage: React.FC<{}> = () => {
 
   /* events */
   const handleSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.files !== null && setFileToUpload(e.target.files[0]);
+    setErrorUploadingFile(undefined);
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+
+      if (!file.name.match(IMAGE_TYPE_RGX)) {
+        setErrorUploadingFile({
+          message:
+            "Please ensure the image is an accepted image type: JPEG, PNG",
+        });
+        return;
+      }
+      setFileToUpload(file);
+    }
   };
 
   const handleUploadFile = async (e: React.FormEvent) => {
