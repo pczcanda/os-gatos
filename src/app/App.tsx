@@ -1,10 +1,10 @@
+import { Box, Container } from "@mui/material";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { APP_ROUTES } from "../constants";
 import CatsPage from "../pages/CatsPage/CatsPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import UploadPage from "../pages/UploadPage/UploadPage";
-import "./App.css";
-import { Box } from "@mui/material";
+import { headerSx } from "./App.styles.";
 
 const App: React.FC<{}> = () => {
   return (
@@ -12,14 +12,14 @@ const App: React.FC<{}> = () => {
       <Routes>
         <Route
           element={
-            <div className="App">
-              <header className="App-header">
-                <h1>Os Gatos</h1>
-              </header>
-              <Box component="main" className="app" p={4}>
-                <Outlet />
+            <Box className="app-layout">
+              <Box component="header" className="header" sx={headerSx}>
+                <h1 className="header__title">Os Gatos</h1>
               </Box>
-            </div>
+              <Container component="main" className="main" maxWidth="lg">
+                <Outlet />
+              </Container>
+            </Box>
           }
         >
           <Route

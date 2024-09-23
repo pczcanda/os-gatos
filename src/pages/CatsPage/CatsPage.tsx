@@ -12,6 +12,8 @@ import {
   fetchAllCatVotes,
   fetchAllFavouriteCats,
 } from "../../utils";
+import { Link } from "react-router-dom";
+import { APP_ROUTES } from "../../constants";
 
 const CatsPage: React.FC<{}> = () => {
   /* state */
@@ -88,6 +90,8 @@ const CatsPage: React.FC<{}> = () => {
       {!errorFetchingCatsData && (
         <Box>
           <h2>Listing all cats</h2>
+          <Link to={APP_ROUTES.UPLOAD}>Add a new cat</Link>
+
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             {catsList.map((cat) => {
               const favouriteDetails = favouriteCats.find(
