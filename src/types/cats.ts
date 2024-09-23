@@ -18,3 +18,5 @@ export interface NewCatResponse {
   pending: 0 | 1;
   approved: 0 | 1;
 }
+
+export type CatsList = Cat[];

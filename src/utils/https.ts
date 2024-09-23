@@ -19,10 +19,14 @@ export const uploadNewCat = async (catImage: FormData) => {
 };
 
 export const fetchCats = async () => {
-  const response = await fetch(ENDPOINTS.ALL_CATS);
+  const response = await fetch(ENDPOINTS.ALL_CATS, {
+    headers: {
+      ...HTTPS_HEADERS,
+    },
+  });
 
   if (!response.ok) {
-    throw new Error("failed to get all catS");
+    throw new Error("failed to get all cats...");
   }
   const data: Cat[] = await response.json();
 
