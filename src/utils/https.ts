@@ -33,7 +33,7 @@ export const fetchAllCats = async () => {
   return data;
 };
 
-export const fetchFavouriteCats = async () => {
+export const fetchAllFavouriteCats = async () => {
   const response = await fetch(ENDPOINTS.FAVOURITE_CATS, {
     headers: {
       ...HTTPS_HEADERS,

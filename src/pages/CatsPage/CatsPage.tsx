@@ -1,16 +1,19 @@
 import { Box, Grid2 as Grid, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
-import { AppError, CatsList, FavouriteCatsList } from "../../types";
-import { fetchAllCats, fetchCats } from "../../utils";
 import CatCard from "../../components/CatCard/CatCard";
+import { AppError, CatsList, FavouriteCatsList } from "../../types";
+import { fetchAllCats, fetchAllFavouriteCats } from "../../utils";
 
 const CatsPage: React.FC<{}> = () => {
   /* state */
   const [catsList, setCatsList] = useState<CatsList>([]);
+  const [favouriteCats, setFavouriteCats] = useState<FavouriteCatsList>([]);
 
   const [errorFetchingCatsList, setErrorFetchingCatsList] = useState<
     AppError | undefined
   >();
+  const [errorFetchingFavouriteCatsList, setErrorFetchingFavouriteCatsList] =
+    useState<AppError | undefined>();
 
   /* effects */
   useEffect(() => {
@@ -27,7 +30,21 @@ const CatsPage: React.FC<{}> = () => {
       }
     };
 
+    const fetchFavouriteCats = async () => {
+      try {
+        const allFavouriteCats = await fetchAllFavouriteCats();
+
+        setFavouriteCats(allFavouriteCats);
+      } catch (e: any) {
+        // handle Error
+        setErrorFetchingFavouriteCatsList({
+          message: e.message || "Failed to fetch favourite cats!",
+        });
+      }
+    };
+
     fetchCats();
+    fetchFavouriteCats();
   }, []);
 
   /* events */
@@ -51,9 +68,13 @@ const CatsPage: React.FC<{}> = () => {
           <h2>Listing all cats</h2>
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             {catsList.map((cat) => {
+              const isFavourite = !!favouriteCats.find(
+                (favCat) => favCat.image_id === cat.id
+              );
+
               return (
                 <Grid size={{ xs: 4, sm: 4, md: 3 }} key={`cat-${cat.id}`}>
-                  <CatCard cat={cat} />
+                  <CatCard cat={cat} isFavourite={isFavourite} />
                 </Grid>
               );
             })}
