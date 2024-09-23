@@ -34,3 +34,8 @@ export interface FavouriteCat {
 }
 
 export type FavouriteCatsList = FavouriteCat[];
+
+export interface FavouriteCatResponse {
+  message: string;
+  id: string;
+}

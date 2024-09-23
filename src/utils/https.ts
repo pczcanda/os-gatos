@@ -1,5 +1,10 @@
 import { ENDPOINTS, HTTPS_HEADERS } from "../constants";
-import { CatsList, FavouriteCatsList, NewCatResponse } from "../types/cats";
+import {
+  CatsList,
+  FavouriteCatResponse,
+  FavouriteCatsList,
+  NewCatResponse,
+} from "../types/cats";
 
 export const uploadNewCat = async (catImage: FormData) => {
   const response = await fetch(ENDPOINTS.UPLOAD, {
@@ -44,6 +49,26 @@ export const fetchAllFavouriteCats = async () => {
     throw new Error("failed to get favourite cats...");
   }
   const data: FavouriteCatsList = await response.json();
+
+  return data;
+};
+
+export const favouriteACat = async (catImageId: string) => {
+  const response = await fetch(ENDPOINTS.FAVOURITE_CATS, {
+    method: "POST",
+    headers: {
+      ...HTTPS_HEADERS,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      image_id: catImageId,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("failed to get favourite cats...");
+  }
+  const data: FavouriteCatResponse = await response.json();
 
   return data;
 };
