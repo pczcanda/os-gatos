@@ -32,6 +32,8 @@ The following methods were implemented:
 - `POST` /votes
 - `DELETE` /favourites/{id}
 
+The current API key for all API requests is within the `.env` file, however, as this is still exposed, it would be beneficial to move it to somewhere more secure or generate an authorization key through user login.
+
 ## Preview - Netlify
 
 This app has been deployed straight from this GitHub repo to Netlify and can be accessed here: [Gatos - the Cats Olympics](https://cats-olympics.netlify.app/)
@@ -64,4 +66,4 @@ This app has been deployed straight from this GitHub repo to Netlify and can be 
 
 7. **Tests**
 
-   More test scenarios can be added to the app
+   More  unit and integration tests for components and API interactions to ensure reliability and robustness.
