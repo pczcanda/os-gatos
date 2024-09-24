@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, CardMedia } from "@mui/material";
+import { CardMedia } from "@mui/material";
 import { useMemo } from "react";
 import { CatUploadPreviewProps } from "./CatUploadPreviewProps";
 

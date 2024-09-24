@@ -148,7 +148,11 @@ const CatsPage: React.FC<{}> = () => {
                     );
 
                   return (
-                    <Grid size={{ xs: 4, sm: 4, md: 3 }} key={`cat-${cat.id}`}>
+                    <Grid
+                      size={{ xs: 4, sm: 4, md: 3 }}
+                      key={`cat-card-${cat.id}`}
+                      data-testid={`cat-card-${cat.id}`}
+                    >
                       <CatCard
                         cat={cat}
                         favouriteId={favouriteDetails?.id}

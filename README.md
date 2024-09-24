@@ -38,9 +38,9 @@ The following methods were implemented:
 
    The UI for error handling can be improved to provide better feedback to the user and allow them to better navigate around the app when errors occur.
 
-2. **Optimistic updating vs Loading UI**
+2. **Loading states**
 
-   Currently the app uses optimistic updating when adding a new cake to the list, which allows for a seamless transition once the form dialog is removed from the page and the new cake is seen in the list without having to make a new call to the server to get the list again. However, there could be a UI requirement to add loading states when the data is submitted and refreshed, specially if many users are simultaneously adding cakes.
+   The current UI could have better and more meaningful loading states when the a new cat image is submitted and the list is refreshed, specially if many users are simultaneously adding cakes.
 
 3. **Styling**
 
@@ -48,7 +48,7 @@ The following methods were implemented:
 
 4. **Image upload**
 
-   It would be nice to add a button to remove the selected image before submitting it. It would also be beneficial to check and validate the image before sending it
+   It would be nice to add a button to remove the selected image before submitting it. It would also be beneficial to check and validate the image before submitting it through the API.
 
 5. **Caching of queries (React query)**
 
@@ -56,7 +56,7 @@ The following methods were implemented:
 
 6. **PWA**
 
-   The app could be turned into a full Progressive Web App (PWA) allowing users to use the app even if offline, where options to navigate with cached data and save new cakes and submit them once the device is back online.
+   The app could be turned into a full Progressive Web App (PWA) allowing users to use the app even if offline, where options to navigate with cached data and save new images, vote cated and pick favourites are availble offline and then leveraged once the device is back online.
 
 7. **Tests**
 

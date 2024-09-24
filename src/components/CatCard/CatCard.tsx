@@ -74,11 +74,14 @@ const CatCard: React.FC<CatCardProps> = ({
         />
       )}
       <CardContent>
-        <Chip label={`Score: ${votes}`} />
+        <Chip label={`Score: ${votes}`} data-testid="cat-votes" />
       </CardContent>
       <CardActions>
         <IconButton aria-label="add to favorites" onClick={handleFavouriting}>
-          <FavoriteIcon color={!!favId ? "error" : undefined} />
+          <FavoriteIcon
+            color={!!favId ? "error" : undefined}
+            data-testid={!!favId ? "favourite-cat" : "unfavourite-cat"}
+          />
         </IconButton>
         <IconButton aria-label="vote up" onClick={handleVoteUp}>
           <ThumbUp />
