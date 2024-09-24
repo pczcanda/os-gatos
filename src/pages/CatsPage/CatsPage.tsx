@@ -1,3 +1,4 @@
+import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import {
   Box,
   Button,
@@ -7,7 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CatCard from "../../components/CatCard/CatCard";
+import { APP_ROUTES } from "../../constants";
 import {
   AppError,
   CatsList,
@@ -19,9 +22,6 @@ import {
   fetchAllCatVotes,
   fetchAllFavouriteCats,
 } from "../../utils";
-import { Link, useNavigate } from "react-router-dom";
-import { APP_ROUTES } from "../../constants";
-import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 
 const CatsPage: React.FC<{}> = () => {
   /* state */

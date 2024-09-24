@@ -60,7 +60,7 @@ const UploadPage: React.FC<{}> = () => {
       const newCat = new FormData();
       newCat.append("file", file);
 
-      const uploadedImage = await uploadNewCat(newCat);
+      await uploadNewCat(newCat);
 
       setUploading(false);
 
