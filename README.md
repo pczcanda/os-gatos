@@ -44,7 +44,7 @@ This app has been deployed straight from this GitHub repo to Netlify and can be 
 
 2. **Loading states**
 
-   The current UI could have better and more meaningful loading states when the a new cat image is submitted and the list is refreshed, specially if many users are simultaneously adding cakes.
+   The current UI could have better and more meaningful loading states when the a new cat image is submitted and the list is refreshed, specially if many users are simultaneously adding cats.
 
 3. **Styling**
 

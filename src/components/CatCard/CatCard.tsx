@@ -41,7 +41,9 @@ const CatCard: React.FC<CatCardProps> = ({
           setFavId(favouriteCatDetails.id);
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error("error trying to handle favouriting cat"); // This error would need to be displayed on page
+    }
   };
 
   const handleVoteUp = async () => {
@@ -49,6 +51,7 @@ const CatCard: React.FC<CatCardProps> = ({
       const voteCatUpResponse = await voteCatUp(cat.id);
       if (voteCatUpResponse.message === "SUCCESS") {
         setVotes((currentVotes) => currentVotes + 1);
+        console.error("error trying to handle voting the cat up"); // This error would need to be displayed on page
       }
     } catch (e) {}
   };
@@ -59,7 +62,9 @@ const CatCard: React.FC<CatCardProps> = ({
       if (voteCatUpResponse.message === "SUCCESS") {
         setVotes((currentVotes) => currentVotes - 1);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error("error trying to handle voting the cat down"); // This error would need to be displayed on page
+    }
   };
 
   return (

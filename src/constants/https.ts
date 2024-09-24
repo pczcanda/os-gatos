@@ -1,5 +1,3 @@
-import { API_KEY } from "./api";
-
 export const HTTPS_HEADERS = {
-  "x-api-key": API_KEY,
+  "x-api-key": `${process.env.REACT_APP_API_KEY}`,
 };
