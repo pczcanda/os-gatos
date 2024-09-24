@@ -20,7 +20,7 @@ This app runs with
 
 ## Gatos API
 
-(The Cat API | https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=FJkYOq9tW) has been used for this project
+[The Cat API](https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=FJkYOq9tW) has been used for this project
 
 The following methods were implemented:
 
@@ -31,6 +31,10 @@ The following methods were implemented:
 - `POST` /favourites
 - `POST` /votes
 - `DELETE` /favourites/{id}
+
+## Preview - Netlify
+
+This app has been deployed straight from this GitHub repo to Netlify and can be accessed here: [Gatos - the Cats Olympics](https://cats-olympics.netlify.app/)
 
 ## Future Improvements
 
