@@ -1,3 +1,4 @@
+import { Warning } from "@mui/icons-material";
 import {
   Alert,
   Box,
@@ -12,10 +13,9 @@ import { useNavigate } from "react-router-dom";
 import CatUploadPreview from "../../components/CatUploadPreview/CatUploadPreview";
 import Loader from "../../components/Loader/Loader";
 import { APP_ROUTES, IMAGE_TYPE_RGX } from "../../constants";
+import { AppError } from "../../types";
 import { uploadNewCat } from "../../utils";
 import { uploadFileSx, uploadPreviewSx } from "./UploadPage.styles";
-import { AppError } from "../../types";
-import { Warning } from "@mui/icons-material";
 
 const UploadPage: React.FC<{}> = () => {
   /* state */
